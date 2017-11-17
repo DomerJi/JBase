@@ -35,8 +35,6 @@ public class TestFragment extends Fragment {
         if(title.equals("center")) {
             TextView textView = (TextView) getView().findViewById(R.id.mytext);
             textView.setVisibility(View.GONE);
-
-
         }
     }
 }
