@@ -9,13 +9,6 @@
         android:gravity="left"
         android:orientation="horizontal">
 
-        <com.jbase.helper.view.ColorFilterImageView
-            android:id="@+id/titleBarBack"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/back"/>
-
-
 
     </LinearLayout>
 

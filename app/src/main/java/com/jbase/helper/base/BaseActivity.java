@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.jbase.helper.R;
-import com.jbase.helper.appliaction.Constant;
+import com.jbase.helper.utils.AppScreenUtil;
 import com.jbase.helper.utils.DensityUtils;
 import com.jbase.helper.view.TitleBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -53,7 +53,7 @@ public abstract class BaseActivity extends Activity {
         titleBar = (TitleBar) frameLayout.findViewById(R.id.easeTitleBar);
 
         View view = LayoutInflater.from(activity).inflate(getLayoutId(),null);
-        int statusBarHeight = Constant.Screen.statusBarHeight;
+        int statusBarHeight = AppScreenUtil.getStatusHeight(activity);
 
         boolean titleBarVisible = getTitleBarVisible();
         if(titleBarVisible){

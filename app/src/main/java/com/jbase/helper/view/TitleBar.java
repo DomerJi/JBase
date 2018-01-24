@@ -7,12 +7,14 @@ import android.graphics.PorterDuff;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.jbase.helper.R;
+import com.scwang.smartrefresh.layout.util.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +28,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_PX;
 public class TitleBar extends FrameLayout {
     Builder builder;
     private int  foregroundColor = Color.BLACK;
-    private int width;
-    private int height;
+    private int height = 0;
     private TabClickLstener tabClickLstener;
     private LinearLayout left;
     private LinearLayout right;
@@ -46,29 +47,28 @@ public class TitleBar extends FrameLayout {
         addView(LayoutInflater.from(getContext()).inflate(R.layout.titlebar_imp,null));
         left = (LinearLayout) findViewById(R.id.titleBarLeft);
         right = (LinearLayout) findViewById(R.id.titleBarRight);
-
-
-    }
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        width = w;
-        height = h;
+        height = DensityUtil.dp2px(44);
         init();
 
+
     }
+
+
 
 
     private void init(){
-
+        left.removeAllViews();
+        right.removeAllViews();
         int padding = height/4;
-        titleBarBack = (ColorFilterImageView) findViewById(R.id.titleBarBack);
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) titleBarBack.getLayoutParams();
+        titleBarBack = new ColorFilterImageView(getContext());
+        titleBarBack.setImageResource(R.drawable.back);
+        LinearLayout.LayoutParams layoutParams =  new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,height);
         layoutParams.width = height;
         layoutParams.height = height;
         titleBarBack.setLayoutParams(layoutParams);
         titleBarBack.setPadding(padding,padding,padding,padding);
         titleBarBack.setColorFilter(foregroundColor, PorterDuff.Mode.SRC_IN);
+        left.addView(titleBarBack);
         if(builder!=null){
             titleBarBack.setVisibility(builder.backUpEnable?VISIBLE:GONE);
             if(builder.backgroundResId!=-1){
@@ -78,15 +78,18 @@ public class TitleBar extends FrameLayout {
             if(!builder.tabs.isEmpty()){
                 for(final TabLabel tab : builder.tabs){
                     if(!TextUtils.isEmpty(tab.name)){
+                        Log.e("TTT",tab.name+" = "+height);
                         PressTextView tabView = new PressTextView(getContext());
                         tabView.setTextColor(foregroundColor);
                         tabView.setText(tab.name);
+
                         LinearLayout.LayoutParams lP = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,height);
                         tabView.setLayoutParams(lP);
                         tabView.setPadding(padding,padding,padding,padding);
                         tabView.setTextSize(COMPLEX_UNIT_PX,height/3);
                         tabView.setBackgroundResource(builder.backgroundResId==0?R.drawable.base_btn_sel:builder.backgroundResId);
                         if(tab.isClick) {
+                            Log.e("TTT111",tab.name);
                             tabView.setOnClickListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -101,6 +104,7 @@ public class TitleBar extends FrameLayout {
                         }else {
                             right.addView(tabView);
                         }
+
                     }else if(tab.resId>0){
                         ColorFilterImageView tabView = new ColorFilterImageView(getContext());
                         tabView.setImageResource(tab.resId);
@@ -121,13 +125,18 @@ public class TitleBar extends FrameLayout {
                         }
                         if(tab.type==Type.Left){
                             left.addView(tabView);
+
                         }else {
                             right.addView(tabView);
                         }
+
+
                     }
 
 
                 }
+
+
             }
         }
 
@@ -139,6 +148,7 @@ public class TitleBar extends FrameLayout {
                 ((Activity)getContext()).finish();
             }
         });
+
     }
     public Builder Builder(){
         if(builder==null){

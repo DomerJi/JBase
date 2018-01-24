@@ -49,8 +49,8 @@ public class Test2Activity extends BaseActivity {
 
     @Override
     protected View getPaddingTopByView(View view) {
-        return view.findViewById(R.id.topImage);
-//        return null;
+//        return view.findViewById(R.id.topImage);
+        return null;
     }
 
     @Override
