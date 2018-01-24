@@ -11,7 +11,7 @@ import com.jbase.helper.base.BaseActivity;
 import com.jbase.helper.view.TitleBar;
 
 public class Test2Activity extends BaseActivity {
-
+    //
 
     @Override
     public int getLayoutId() {
