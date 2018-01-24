@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jbase.helper.Test2Activity">
+
+    <RelativeLayout
+        android:id="@+id/topImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/top_bar">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello World"/>
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:src="@mipmap/ic_launcher"/>
+
+    </RelativeLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

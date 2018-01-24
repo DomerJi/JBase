@@ -24,4 +24,8 @@
 
 在相知、相伴的无数日子里，你对于那个他（她）所给出的承诺是什么？是金钱？是物质？或许这当中有太多太多，多到你都忘记曾经对他（她）说过了“我爱你”！
 </string>
+
+    <string name="colorPrimaryStr">#3F51B5</string>
+    <string name="colorPrimaryDarkStr">#303F9F</string>
+    <string name="colorAccentStr">#FF4081</string>
 </resources>

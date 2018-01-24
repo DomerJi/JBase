@@ -6,7 +6,7 @@ import com.jbase.helper.user.IUser;
  * Created by aaa on 2017/8/11.
  */
 
-public class User implements IUser{
+public class User<T> implements IUser{
 
     public String username;
 

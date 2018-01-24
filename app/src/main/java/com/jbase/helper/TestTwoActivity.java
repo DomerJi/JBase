@@ -1,12 +1,21 @@
 package com.jbase.helper;
 
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.jbase.helper.ai.Action;
+import com.jbase.helper.ai.Study;
+import com.jbase.helper.ai.Thing;
 import com.jbase.helper.call.OnByTypeListener;
 import com.jbase.helper.net.ActionUserInfoBean;
 import com.jbase.helper.net.RetrofitUtil;
@@ -20,7 +29,10 @@ import com.orhanobut.logger.Logger;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.security.auth.Subject;
 
@@ -35,6 +47,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TestTwoActivity extends AppCompatActivity {
+
+    private ImageView clipDrawable3;
+    private ClipDrawable clipDrawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +138,10 @@ public class TestTwoActivity extends AppCompatActivity {
 
 //        toprintf();
 
+        ai();
+        structure();
 
+        clipDrawable();
 
     }
 
@@ -149,4 +167,64 @@ public class TestTwoActivity extends AppCompatActivity {
         final ObservableSource<ResponseBody> observable2 = request.spaceList3(body);
 
     }
+
+    private void ai(){
+        Thing thing = new Thing();
+        Action action = new Action();
+        action.setPlan("吃饭");
+        thing.setAction(action);
+
+        Thing thing1 = new Thing();
+        Action action1 = new Action();
+//        thing1.setEffect(0.1d);
+        action1.setPlan("喝水");
+        thing1.setAction(action1);
+
+        Study.getInstance().addKnowledge(thing);
+        Study.getInstance().addKnowledge(thing1);
+        Log.e("AI = ",Study.getInstance().getThings()+"      = = = = "+Study.getInstance().getThings().size());
+    }
+
+    private  void structure(){
+        BitSet bm = new BitSet();
+               System.out.println(bm.isEmpty()+"--"+bm.size());
+               bm.set(0);
+               System.out.println(bm.isEmpty()+"--"+bm.size());
+               bm.set(1);
+               System.out.println(bm.isEmpty()+"--"+bm.size());
+               System.out.println(bm.get(65));
+               System.out.println(bm.isEmpty()+"--"+bm.size());
+               bm.set(65);
+               System.out.println(bm.isEmpty()+"--"+bm.size());
+
+    }
+
+    private void clipDrawable(){
+        Drawable drawable = getResources().getDrawable(R.mipmap.welcome);
+        clipDrawable = new ClipDrawable(drawable, Gravity.TOP,ClipDrawable.VERTICAL);
+        ImageView clipDrawable3 = (ImageView) findViewById(R.id.clipDrawable);
+
+        clipDrawable3.setImageDrawable(clipDrawable);
+
+        final Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(0x123);
+                if (clipDrawable.getLevel() >= 10000) {
+                    timer.cancel();
+                }
+            }
+        },0,50);
+    }
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == 0x123){
+                clipDrawable.setLevel(clipDrawable.getLevel()+100);
+            }
+        }
+    };
+
 }

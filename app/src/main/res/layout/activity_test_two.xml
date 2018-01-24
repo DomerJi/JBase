@@ -10,4 +10,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.jbase.helper.TestTwoActivity">
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="#ffffff"
+        android:text="绿色图片绿色图片绿色图片绿色图片绿色图片"
+        android:gravity="center"
+        android:background="@drawable/green_radiu"/>
+
+
+    <ImageView
+        android:id="@+id/clipDrawable"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title"/>
+
 </RelativeLayout>
