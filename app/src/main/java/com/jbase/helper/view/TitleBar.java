@@ -27,7 +27,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_PX;
 
 public class TitleBar extends FrameLayout {
     Builder builder;
-    private int  foregroundColor = Color.BLACK;
+    private int  foregroundColor = Color.WHITE;
     private int height = 0;
     private TabClickLstener tabClickLstener;
     private LinearLayout left;
@@ -50,7 +50,6 @@ public class TitleBar extends FrameLayout {
         height = DensityUtil.dp2px(44);
         init();
 
-
     }
 
 
@@ -62,9 +61,7 @@ public class TitleBar extends FrameLayout {
         int padding = height/4;
         titleBarBack = new ColorFilterImageView(getContext());
         titleBarBack.setImageResource(R.drawable.back);
-        LinearLayout.LayoutParams layoutParams =  new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,height);
-        layoutParams.width = height;
-        layoutParams.height = height;
+        LinearLayout.LayoutParams layoutParams =  new LinearLayout.LayoutParams(height,height);
         titleBarBack.setLayoutParams(layoutParams);
         titleBarBack.setPadding(padding,padding,padding,padding);
         titleBarBack.setColorFilter(foregroundColor, PorterDuff.Mode.SRC_IN);
@@ -122,6 +119,8 @@ public class TitleBar extends FrameLayout {
                                     }
                                 }
                             });
+                        }else {
+                            tabView.setNoOnTouch();
                         }
                         if(tab.type==Type.Left){
                             left.addView(tabView);

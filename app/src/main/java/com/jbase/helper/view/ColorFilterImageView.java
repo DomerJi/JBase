@@ -39,6 +39,10 @@ public class ColorFilterImageView extends android.support.v7.widget.AppCompatIma
         setOnTouchListener(this);
     }
 
+    public void setNoOnTouch(){
+        setOnTouchListener(null);
+    }
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {

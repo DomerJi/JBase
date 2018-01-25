@@ -14,6 +14,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:gravity="center_horizontal"
             android:text="Hello World"/>
         <ImageView
             android:layout_alignParentBottom="true"

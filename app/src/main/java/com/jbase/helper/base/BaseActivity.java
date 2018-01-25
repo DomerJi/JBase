@@ -9,12 +9,13 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.jbase.helper.R;
-import com.jbase.helper.utils.AppScreenUtil;
+import com.jbase.helper.appliaction.Constant;
 import com.jbase.helper.utils.DensityUtils;
 import com.jbase.helper.view.TitleBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -47,13 +48,16 @@ public abstract class BaseActivity extends Activity {
         FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(activity).inflate(R.layout.base_activity_layout,null);
         easeTopView = frameLayout.findViewById(R.id.easeTopView);
         refreshLayout = (SmartRefreshLayout) frameLayout.findViewById(R.id.refreshLayout);
-
         mRootView = (FrameLayout) frameLayout.findViewById(R.id.baseFrame);
         statusBar = (RelativeLayout) frameLayout.findViewById(R.id.statusBar);
         titleBar = (TitleBar) frameLayout.findViewById(R.id.easeTitleBar);
-
         View view = LayoutInflater.from(activity).inflate(getLayoutId(),null);
-        int statusBarHeight = AppScreenUtil.getStatusHeight(activity);
+        int statusBarHeight = Constant.Screen.statusBarHeight;
+        Log.e("statusBarHeight = ",statusBarHeight+" = = ");
+        ViewGroup.LayoutParams statusBarLayoutParams = statusBar.getLayoutParams();
+        statusBarLayoutParams.height = statusBarHeight;
+        statusBar.setLayoutParams(statusBarLayoutParams);
+
 
         boolean titleBarVisible = getTitleBarVisible();
         if(titleBarVisible){
@@ -100,7 +104,7 @@ public abstract class BaseActivity extends Activity {
     public void setRefreshLayoutEnable(boolean layoutEnable) {
         if(refreshLayout!=null){
             refreshLayout.setEnableRefresh(layoutEnable);
-            refreshLayout.setHeaderHeight(layoutEnable?100:0);
+            refreshLayout.setHeaderHeight(layoutEnable?60:0);
             if(topView==null){
                 return;
             }
