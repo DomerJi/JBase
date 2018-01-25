@@ -2,9 +2,11 @@
 ![](https://github.com/DomerJi/JBase/blob/master/app/pics/Screenshot_2018-01-25-17-34-24-153_com.jbase.help.png)
 ![](https://github.com/DomerJi/JBase/blob/master/app/pics/Screenshot_2018-01-25-17-35-03-643_com.jbase.help.png)
 #二、功能
+
          /**
          * 自定义TitleBar演示
          */
+         @Override
         titleBar.Builder().setBackgroundPressState()
                 .setBackUpEnable(true)
                 .addTabString("首页")
@@ -22,10 +24,12 @@
                     }
                 })
                 .create();
+
+
             /**
             * 是否沉浸  沉浸返回沉浸的view  默认不沉浸
             */
-          @Override
+            @Override
             protected View getPaddingTopByView(View view) {
                 return view.findViewById(R.id.topImage);
         //        return null;
