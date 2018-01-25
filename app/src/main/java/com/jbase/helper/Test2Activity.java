@@ -22,6 +22,7 @@ public class Test2Activity extends BaseActivity {
     public void initData(@Nullable Bundle savedInstanceState) {
         /**
          * 启用刷新
+         *
          */
         setRefreshLayoutEnable(true);
         /**
