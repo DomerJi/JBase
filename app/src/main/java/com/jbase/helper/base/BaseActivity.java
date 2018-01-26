@@ -58,6 +58,7 @@ public abstract class BaseActivity extends Activity {
         statusBarLayoutParams.height = statusBarHeight;
         statusBar.setLayoutParams(statusBarLayoutParams);
 
+        topView = getPaddingTopByView(view);
 
         boolean titleBarVisible = getTitleBarVisible();
         if(titleBarVisible){
@@ -71,7 +72,6 @@ public abstract class BaseActivity extends Activity {
          * 设置头部空间
          */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            topView = getPaddingTopByView(view);
             if(topView !=null){
                 topView.setPadding(topView.getPaddingLeft(), topView.getPaddingTop()+paddingTop, topView.getPaddingRight(), topView.getPaddingBottom());
             }else {
@@ -81,7 +81,7 @@ public abstract class BaseActivity extends Activity {
                 refreshLayout.setLayoutParams(lp);
             }
         }else {
-            statusBar.setVisibility(View.INVISIBLE);
+            statusBar.setVisibility(View.GONE);
         }
 
         statusBar.setMinimumHeight(statusBarHeight);
@@ -114,6 +114,7 @@ public abstract class BaseActivity extends Activity {
             refreshLayout.setOnMultiPurposeListener(new OnMultiPurposeListener() {
                 @Override
                 public void onHeaderPulling(RefreshHeader header, float percent, int offset, int headerHeight, int extendHeight) {
+
                     if(statusBar.getVisibility()==View.VISIBLE){
                         statusBar.setVisibility(View.INVISIBLE);
                     }
@@ -128,7 +129,6 @@ public abstract class BaseActivity extends Activity {
                             titleBar.setVisibility(View.VISIBLE);
                         }
                     }
-
                 }
 
                 @Override
