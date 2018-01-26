@@ -37,7 +37,7 @@ public abstract class BaseActivity extends Activity {
     protected FrameLayout mRootView;
     protected int paddingTop;
     protected SmartRefreshLayout refreshLayout;
-    private View easeTopView;
+    protected View easeTopView;
     private View topView;
 
     @SuppressLint("RestrictedApi")
@@ -89,7 +89,6 @@ public abstract class BaseActivity extends Activity {
 
         initState();
         setContentView(frameLayout);
-        setRefreshAndLoadMoreLayoutEnable(false);
         initData(savedInstanceState);
         initListener();
 
@@ -101,12 +100,16 @@ public abstract class BaseActivity extends Activity {
         setLoadMoreLayoutEnable(layoutEnable);
     }
 
+
     public void setRefreshLayoutEnable(boolean layoutEnable) {
         if(refreshLayout!=null){
             refreshLayout.setEnableRefresh(layoutEnable);
-            refreshLayout.setHeaderHeight(layoutEnable?60:0);
+            refreshLayout.setHeaderHeight(layoutEnable?60:-1);
             if(topView==null){
                 return;
+            }
+            if(!layoutEnable){
+                refreshLayout.setOnMultiPurposeListener(null);
             }
             refreshLayout.setOnMultiPurposeListener(new OnMultiPurposeListener() {
                 @Override
@@ -218,7 +221,7 @@ public abstract class BaseActivity extends Activity {
     public void setLoadMoreLayoutEnable(boolean layoutEnable) {
         if(refreshLayout!=null){
             refreshLayout.setEnableLoadmore(layoutEnable);
-            refreshLayout.setFooterHeight(layoutEnable?60:0);
+            refreshLayout.setFooterHeight(layoutEnable?60:-1);
         }
     }
 

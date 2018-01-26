@@ -33,7 +33,7 @@ public class App extends MultiDexApplication {
         SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                layout.setPrimaryColorsId(android.R.color.darker_gray, android.R.color.white);//全局设置主题颜色
+                layout.setPrimaryColorsId(android.R.color.white, android.R.color.black);//全局设置主题颜色
                 return new ClassicsHeader(context)
                         .setTimeFormat(new SimpleDateFormat("上次更新 yy-MM-dd hh:mm:ss", Locale.CHINA));//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
             }
