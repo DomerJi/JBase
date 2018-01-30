@@ -20,6 +20,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import cn.bingoogolapple.swipebacklayout.BGASwipeBackManager;
+
 /**
  * Created by aaa on 2018/1/23.
  */
@@ -64,6 +66,10 @@ public class App extends MultiDexApplication {
         app = this;
 
         initConstant();
+
+        // 必须在 Application 的 onCreate 方法中执行 BGASwipeBackManager.getInstance().init(this) 来初始化滑动返回
+        BGASwipeBackManager.getInstance().init(this);
+
     }
 
     private void initConstant() {

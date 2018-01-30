@@ -27,22 +27,27 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
     testCompile 'junit:junit:4.12'
     compile 'net.qiujuer.genius:blur:2.0.0-beta4'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.android.support:design:25.4.0'
 
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    compile 'cn.bingoogolapple:bga-swipebacklayout:1.1.0@aar'
 
     compile 'com.orhanobut:logger:2.1.1'
     //65535
     compile 'com.android.support:multidex:1.0.2'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
 
     // Android 支持 Rxjava
 // 此处一定要注意使用RxJava2的版本
-    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
 // 衔接 Retrofit & RxJava

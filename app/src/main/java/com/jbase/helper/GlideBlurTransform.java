@@ -8,6 +8,8 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
 import net.qiujuer.genius.blur.StackBlur;
 
+import java.security.MessageDigest;
+
 public class GlideBlurTransform extends BitmapTransformation {
     public GlideBlurTransform(Context context) {
      super(context);
@@ -15,7 +17,7 @@ public class GlideBlurTransform extends BitmapTransformation {
 
     @Override
     protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
-     return blurCrop(pool, toTransform);
+       return blurCrop(pool, toTransform);
     }
 
     private static Bitmap blurCrop(BitmapPool pool, Bitmap source) {
@@ -28,7 +30,7 @@ public class GlideBlurTransform extends BitmapTransformation {
     }
 
     @Override
-    public String getId() {
-     return getClass().getName();
+    public void updateDiskCacheKey(MessageDigest messageDigest) {
+
     }
 }

@@ -28,7 +28,8 @@
         </receiver>
 
         <activity android:name=".TestTwoActivity" />
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".TestActivity"
+            android:theme="@style/AppTheme.Transparent"></activity>
     </application>
 
 </manifest>

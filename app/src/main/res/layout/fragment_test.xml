@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:focusable="true">
+
+
 
         <TextView
             android:id="@+id/mytext"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/book"
             android:lineSpacingExtra="2dp"
             android:textColor="#ffffffff"
             android:padding="8dp"/>
 
-
-    </ScrollView>
-
+        </LinearLayout>
 
 
 
 
-</LinearLayout>
+
+
+
+</android.support.v4.widget.NestedScrollView>

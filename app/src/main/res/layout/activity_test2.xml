@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/topImage"
         android:layout_width="match_parent"
-        android:layout_height="1000dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/top_bar">
 
@@ -18,7 +18,6 @@
             android:id="@+id/byTopView"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="100dp"
             android:background="@android:color/holo_red_dark"/>
         <TextView
             android:layout_width="match_parent"

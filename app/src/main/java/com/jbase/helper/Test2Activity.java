@@ -1,6 +1,7 @@
 package com.jbase.helper;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,10 +35,10 @@ public class Test2Activity extends BaseActivity {
          * 自定义TitleBar演示
          */
         titleBar.Builder().setBackgroundPressState()
-                .setBackUpEnable(true)
+                .setBackUpEnable(false)
                 .addTabString("首页")
                 .addTabString("社群")
-                .addTabImage(R.mipmap.ic_launcher, TitleBar.Type.Right,false)
+                .addTabImage(R.mipmap.ic_launcher, TitleBar.Type.Right)
                 .addTabString("提交", TitleBar.Type.Right)
                 .addTabString("看", TitleBar.Type.Right)
                 .addTabString("什么生活", TitleBar.Type.Right)
@@ -46,6 +47,9 @@ public class Test2Activity extends BaseActivity {
                     public void onClick(View view, int id, String title) {
                         if(!TextUtils.isEmpty(title)){
                             Toast.makeText(activity,title,Toast.LENGTH_SHORT).show();
+                        }else if(R.mipmap.ic_launcher==id){
+                            Toast.makeText(activity,"id = "+id,Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(activity,TestActivity.class));
                         }
                     }
                 })

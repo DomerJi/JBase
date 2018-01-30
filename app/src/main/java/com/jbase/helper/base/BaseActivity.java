@@ -1,15 +1,16 @@
 package com.jbase.helper.base;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -29,7 +30,7 @@ import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
  * Created by aaa on 2018/1/23.
  */
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     protected BaseActivity activity;
     protected RelativeLayout statusBar;
@@ -43,6 +44,7 @@ public abstract class BaseActivity extends Activity {
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         activity = this;
         FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(activity).inflate(R.layout.base_activity_layout,null);
@@ -61,17 +63,19 @@ public abstract class BaseActivity extends Activity {
         topView = getPaddingTopByView(view);
 
         boolean titleBarVisible = getTitleBarVisible();
-        if(titleBarVisible){
-            titleBar.setVisibility(View.VISIBLE);
-            paddingTop = statusBarHeight+ DensityUtils.dip2px(activity,44);
-        }else {
-            paddingTop = statusBarHeight;
-            titleBar.setVisibility(View.GONE);
-        }
+
         /**
          * 设置头部空间
          */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if(titleBarVisible){
+                titleBar.setVisibility(View.VISIBLE);
+                paddingTop = statusBarHeight+ DensityUtils.dip2px(activity,44);
+            }else {
+                paddingTop = statusBarHeight;
+                titleBar.setVisibility(View.GONE);
+            }
+
             if(topView !=null){
                 topView.setPadding(topView.getPaddingLeft(), topView.getPaddingTop()+paddingTop, topView.getPaddingRight(), topView.getPaddingBottom());
             }else {
@@ -81,7 +85,23 @@ public abstract class BaseActivity extends Activity {
                 refreshLayout.setLayoutParams(lp);
             }
         }else {
+            if(titleBarVisible){
+                titleBar.setVisibility(View.VISIBLE);
+                paddingTop = DensityUtils.dip2px(activity,44);
+            }else {
+                paddingTop = 0;
+                titleBar.setVisibility(View.GONE);
+            }
             statusBar.setVisibility(View.GONE);
+            if(topView !=null){
+                topView.setPadding(topView.getPaddingLeft(), topView.getPaddingTop()+paddingTop, topView.getPaddingRight(), topView.getPaddingBottom());
+            }else {
+                easeTopView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) refreshLayout.getLayoutParams();
+                lp.setMargins(0,paddingTop,0,0);
+                refreshLayout.setLayoutParams(lp);
+            }
+
         }
 
         statusBar.setMinimumHeight(statusBarHeight);
@@ -105,6 +125,7 @@ public abstract class BaseActivity extends Activity {
         if(refreshLayout!=null){
             refreshLayout.setEnableRefresh(layoutEnable);
             refreshLayout.setHeaderHeight(layoutEnable?60:-1);
+            refreshLayout.setDisableContentWhenLoading(false);
             if(topView==null){
                 return;
             }
